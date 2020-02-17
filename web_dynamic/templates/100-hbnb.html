@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+
+    <!-- HEAD -->
+
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width">
+    <title>Holberton AirBnB</title>
+
+    <!-- SCRIPTS -->
+    <script defer
+       src="https://code.jquery.com/jquery-3.4.1.min.js"
+       integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo="
+       crossorigin="anonymous"></script>
+    <script defer type="text/javascript" src="{{ url_for('static', filename='scripts/100-hbnb.js') }}?{{cache_id}}"></script>
+
+    <!-- FAVICON -->
+
+    <link rel="shortcut icon" href="{{ url_for('static', filename='images/icon.png') }}?{{cache_id}}">
+
+    <!-- **********************
+	 CSS styles
+	 ********************** -->
+
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles/4-common.css') }}?{{cache_id}}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles/3-header.css') }}?{{cache_id}}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles/3-footer.css') }}?{{cache_id}}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles/6-filters.css') }}?{{cache_id}}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles/8-places.css') }}?{{cache_id}}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles/font-awesome.css') }}?{{cache_id}}">
+  </head>
+
+  <!-- **********************
+       BODY
+       ********************** -->
+
+  <body>
+
+    <!-- **********************
+	 HEADER
+	 ********************** -->
+
+    <header>
+      <DIV class="statuscontainer">
+	<DIV id="api_status"></DIV>
+      </DIV>
+    </header>
+    <main>
+      <div class="container">
+
+	<!-- **********************
+	     FILTERS
+	     ********************** -->
+
+	<section class="filters">
+
+	  <!-- **********************
+	       LOCATIONS
+	       ********************** -->
+
+	  <div class="locations">
+	    <h3>States</h3>
+	    <h4>&nbsp;</h4>
+	    <ul class="popover">
+	      <LI>
+	      {% for state in states|dictsort %}
+	      <INPUT type="checkbox" class="checkbox"
+                     data-id="State.{{ state[1].id }}"
+                     data-name="State.{{ state[1].name }}">
+	      <H2>{{ state[0] }}</H2>
+	      </LI>
+	      <UL>
+		{% for city in state[1].cities|sort(attribute='name') %}
+		<LI>
+		  <INPUT type="checkbox" class="checkbox"
+                         data-id="City.{{ city.id }}"
+			 data-name="City.{{ city.name }}">
+		  <label for="cityname">{{ city.name }}</label>
+		</LI>
+		{% endfor %}
+	      </UL>
+	      {% endfor %}
+	    </ul>
+	  </div>
+
+	  <!-- **********************
+	       AMENITIES
+	       ********************** -->
+
+	  <div class="amenities">
+	    <h3>Amenities</h3>
+	    <h4>&nbsp;</h4>
+	    <ul class="popover">
+	      {% for amenity in amens|sort(attribute='name') %}
+	      <LI>
+		<INPUT type="checkbox" class="checkbox"
+		       data-id="Amenity.{{ amenity.id }}" data-name="Amenity.{{ amenity.name }}">
+		<label for="amenityname">{{ amenity.name }}</label>
+	      </LI>
+	      {% endfor %}
+	    </ul>
+	  </div>
+
+	  <!-- **********************
+	       SEARCH BUTTON
+	       ********************** -->
+
+	  <button>Search</button>
+	</section>
+
+	<section class="places">
+
+	<!-- **********************
+	     BEGIN 1 PLACE
+	     ********************** -->
+
+	</section>
+      </div>
+    </main>
+
+    <!-- FOOTER -->
+
+    <footer>
+      Holberton School
+    </footer>
+  </body>
+</html>
